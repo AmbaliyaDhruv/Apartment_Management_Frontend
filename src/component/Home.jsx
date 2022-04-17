@@ -26,7 +26,7 @@ const hendlePage=(value)=>{
     page===0?setpage(1):setpage(page+value)
     getData();
 }
-console.log(page)
+
 const hendleChange=(e)=>{
     if(e.target.value==="all"){
         getData()
