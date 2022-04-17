@@ -53,7 +53,7 @@ function Login() {
 
   const hendleSubmit=(e)=>{
         e.preventDefault()
-        axios.post('http://localhost:8080/manager/login',text).then(res=>{
+        axios.post('https://apartmentmanagesystem.herokuapp.com/manager/login',text).then(res=>{
             settext({
                 email:'',
                 password:''
@@ -66,7 +66,7 @@ function Login() {
     
   const submitdata=(e)=>{
     e.preventDefault()
-    axios.post('http://localhost:8080/resident',logdata).then(res=>{
+    axios.post('https://apartmentmanagesystem.herokuapp.com/resident',logdata).then(res=>{
         setlogdata({
             name:"",
             gender:"",
@@ -84,19 +84,13 @@ function Login() {
 
   return (
       <>
-         <h3>Manger Login</h3>
-         <br />
-         <form onSubmit={hendleSubmit}>
-             <Input type="text" id='email' value={text.email} onChange={hendleChange} />
-             <br />
-             <Input type="password" id='password' value={text.password}  onChange={hendleChange} />
-             <br />
-             <Submit type="submit" />
-         </form>
+     
+        
 
-         <br />
+         
 
-            {login? <form onSubmit={submitdata}>
+            {login?<><h3>Add New Member</h3>
+   <br /> <form onSubmit={submitdata}>
              <Input type="text" id='name' placeholder='name' value={logdata.name}   onChange={hendleChangesforData} />
              <br />
              <label>Gender</label>
@@ -141,7 +135,17 @@ function Login() {
             <br />
              <Submit type="submit" />
          </form>
-:null}
+         </>: <>
+<h3>Manger Login</h3>
+   <br />
+  <form onSubmit={hendleSubmit}>
+       <Input type="text" id='email' value={text.email} onChange={hendleChange} />
+       <br />
+       <Input type="password" id='password' value={text.password}  onChange={hendleChange} />
+       <br />
+       <Submit type="submit" />
+   </form>
+</>}
        
 
 

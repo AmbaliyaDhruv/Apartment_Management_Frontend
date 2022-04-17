@@ -7,7 +7,7 @@ function Home() {
  const [data,setData] =useState([])
  const [parameter,setparameter]=useState("")
  const getData=()=>{
-     axios.get("http://localhost:8080/resident").then(res=>{
+     axios.get("https://apartmentmanagesystem.herokuapp.com/resident").then(res=>{
          setData(res.data)
      })
  }
@@ -24,7 +24,7 @@ const hendleChange=(e)=>{
     
     }
  else{
-    axios.get(`http://localhost:8080/resident?type=${e.target.value}`).then(res=>{
+    axios.get(`https://apartmentmanagesystem.herokuapp.com/resident?type=${e.target.value}`).then(res=>{
        setData(res.data)
        
    })

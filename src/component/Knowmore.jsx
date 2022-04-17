@@ -5,7 +5,7 @@ function Knowmore() {
     const {id}=useParams()
     const [data,setData]=useState({})
     useEffect(()=>{
-       axios.get(`http://localhost:8080/resident/${id}`).then(res=>{
+       axios.get(`https://apartmentmanagesystem.herokuapp.com/resident/${id}`).then(res=>{
               setData(res.data)
        })  
     },[])
