@@ -139,9 +139,9 @@ function Login() {
 <h3>Manger Login</h3>
    <br />
   <form onSubmit={hendleSubmit}>
-       <Input type="text" id='email' value={text.email} onChange={hendleChange} />
+       <Input type="text" id='email' placeholder='Email' value={text.email} onChange={hendleChange} />
        <br />
-       <Input type="password" id='password' value={text.password}  onChange={hendleChange} />
+       <Input type="password" id='password' placeholder='Password' value={text.password}  onChange={hendleChange} />
        <br />
        <Submit type="submit" />
    </form>
