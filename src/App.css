@@ -40,3 +40,26 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+.navbar{
+  display: flex;
+  gap: 80px;
+  background-color: #282c34;
+  color: white;
+  justify-content: space-around;
+ 
+}
+
+.loginbtn{
+
+  color:black ;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  height: 30px;
+  cursor: pointer;
+  background-color: whitesmoke;
+}
