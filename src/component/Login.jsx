@@ -20,12 +20,12 @@ function Login() {
     })
 
     const getBlock=()=>{
-        axios.get("http://localhost:8080/block").then((res)=>{
+        axios.get("https://apartmentmanagesystem.herokuapp.com/block").then((res)=>{
             setblock(res.data)
         })
     }
     const getflat=()=>{
-        axios.get("http://localhost:8080/flat").then((res)=>{
+        axios.get("https://apartmentmanagesystem.herokuapp.com/flat").then((res)=>{
             setflat(res.data)
         })
     }
