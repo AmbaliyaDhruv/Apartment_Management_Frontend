@@ -6,25 +6,34 @@ import {Link} from "react-router-dom"
 function Home() {
  const [data,setData] =useState([])
  const [parameter,setparameter]=useState("")
+ const [page,setpage]=useState(1)
  const getData=()=>{
-     axios.get("https://apartmentmanagesystem.herokuapp.com/resident").then(res=>{
+     axios.get(`https://apartmentmanagesystem.herokuapp.com/resident?page=${page}`).then(res=>{
          setData(res.data)
+         if(res.data.length===0){
+             alert("No more data")
+             setpage(1);
+            window.location.href="/";
+         }
      })
  }
 
 useEffect(()=>{
     getData()
 },[])
- 
-
-
+ page===0?setpage(1):null
+const hendlePage=(value)=>{
+    page===0?setpage(1):setpage(page+value)
+    getData();
+}
+console.log(page)
 const hendleChange=(e)=>{
     if(e.target.value==="all"){
         getData()
     
     }
  else{
-    axios.get(`https://apartmentmanagesystem.herokuapp.com/resident?type=${e.target.value}`).then(res=>{
+    axios.get(`https://apartmentmanagesystem.herokuapp.com/resident?type=${e.target.value}&page=${page}`).then(res=>{
        setData(res.data)
        
    })
@@ -36,7 +45,7 @@ const sortChange=(e)=>{
     setparameter(e.target.value)
 }
 
-console.log(parameter)
+
   return (
       <>
        <label>Filter By Type</label>
@@ -51,7 +60,9 @@ console.log(parameter)
                  <option value="ascending">Ascending</option>
                  <option value="descending">Descending</option>
            </Select>
+         
       <TableOut>
+
        <thead>
            <Tr>
                 <Th>Name</Th>
@@ -80,6 +91,10 @@ console.log(parameter)
               })}
        </tbody>
     </TableOut>
+    <Box>
+        <Button onClick={()=>{hendlePage(-1)}}>Previous</Button>
+        <Button onClick={()=>{hendlePage(1)}}>Next</Button>
+    </Box>
     </>
   )
 }
@@ -117,4 +132,27 @@ const Select=styled.select`
     height: 30px;
     font-size: 15px;
 
+`
+
+const Box=styled.div`
+display: flex;
+gap: 20px;
+margin: auto;
+width:40%;
+justify-content: center;
+margin-top: 20px;
+`
+
+const Button=styled.button`
+background-color: white;
+border: 2px solid black;
+padding: 10px 20px;
+font-size: 15px;
+font-weight: 600;
+border-radius: 10px;
+&:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
 `
