@@ -2,17 +2,21 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import {useSelector,useDispatch} from 'react-redux'
+import { nextPage,prevPage } from '../actions/change'
 import {Link} from "react-router-dom"
 function Home() {
+    const page=useSelector(state=>state.changeThePage);
+    const dispatch=useDispatch();
  const [data,setData] =useState([])
  const [parameter,setparameter]=useState("")
- const [page,setpage]=useState(1)
+
  const getData=()=>{
      axios.get(`https://apartmentmanagesystem.herokuapp.com/resident?page=${page}`).then(res=>{
          setData(res.data)
          if(res.data.length===0){
              alert("No more data")
-             setpage(1);
+             
             window.location.href="/";
          }
      })
@@ -20,12 +24,9 @@ function Home() {
 
 useEffect(()=>{
     getData()
-},[])
- page===0?setpage(1):null
-const hendlePage=(value)=>{
-    page===0?setpage(1):setpage(page+value)
-    getData();
-}
+},[page])
+ 
+
 
 const hendleChange=(e)=>{
     if(e.target.value==="all"){
@@ -92,8 +93,8 @@ const sortChange=(e)=>{
        </tbody>
     </TableOut>
     <Box>
-        <Button onClick={()=>{hendlePage(-1)}}>Previous</Button>
-        <Button onClick={()=>{hendlePage(1)}}>Next</Button>
+        <Button onClick={()=>{dispatch(prevPage())}}>Previous</Button>
+        <Button onClick={()=>{dispatch(nextPage())}}>Next</Button>
     </Box>
     </>
   )
